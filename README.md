@@ -1,3 +1,9 @@
+Fact
+=====
+
+Example
+
+```
 package main
 
 import (
@@ -22,3 +28,4 @@ func main() {
 	fmt.Println(f.WhoHas("ชื่อ", "โฮ่ง"))
 	fmt.Println(f.What(f.What("แมว", "ชื่อ"), "สี"))
 }
+```
