@@ -1,0 +1,7 @@
+package: fact
+import:
+- package: github.com/cayleygraph/cayley
+  version: ^0.6.1
+  subpackages:
+  - graph
+  - graph/bolt
