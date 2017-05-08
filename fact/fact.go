@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"reflect"
+	"strings"
 
 	"github.com/cayleygraph/cayley"
 	"github.com/cayleygraph/cayley/graph"
@@ -46,6 +47,15 @@ func NewFact(name string) *Fact {
 		log.Fatalln(err)
 	}
 	return &Fact{G: g}
+}
+
+// Stringify to make query result to string
+func (f *Fact) Stringify(result []interface{}) string {
+	out := []string{}
+	for _, v := range result {
+		out = append(out, v.(string))
+	}
+	return strings.Join(out, ", ")
 }
 
 // Close to release resource
