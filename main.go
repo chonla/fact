@@ -8,7 +8,10 @@ import (
 func main() {
 	// We store fact in graph database.
 	// Here we use Cayley to store them.
-	f := fact.NewFact("./db/knowledge.db")
+	f := fact.NewFact("")
+
+	// Pass a file name to create a persistent fact
+	// f := fact.NewFact("./db/knowledge.db")
 
 	defer f.Close()
 

@@ -15,10 +15,9 @@ import (
 
 // Fact is fact!
 type Fact struct {
-	G    *cayley.Handle
-	T    *Triple
-	Q    *Triple
-	QDir string
+	G *cayley.Handle
+	T *Triple
+	Q *Triple
 }
 
 // Triple to represent triple
@@ -33,10 +32,16 @@ const engine = "bolt"
 // NewFact to Create Fact database if not exist
 func NewFact(name string) *Fact {
 	graph.IgnoreDuplicates = true
-	if _, err := os.Stat(name); os.IsNotExist(err) {
-		graph.InitQuadStore(engine, name, nil)
+	var g *cayley.Handle
+	var err error
+	if name != "" {
+		if _, err := os.Stat(name); os.IsNotExist(err) {
+			graph.InitQuadStore(engine, name, nil)
+		}
+		g, err = cayley.NewGraph(engine, name, nil)
+	} else {
+		g, err = cayley.NewMemoryGraph()
 	}
-	g, err := cayley.NewGraph(engine, name, nil)
 	if err != nil {
 		log.Fatalln(err)
 	}
