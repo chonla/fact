@@ -19,6 +19,7 @@ type Fact struct {
 	G *cayley.Handle
 	T *Triple
 	Q *Triple
+	C *CurrentFact
 }
 
 // Triple to represent triple
@@ -46,7 +47,7 @@ func NewFact(name string) *Fact {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	return &Fact{G: g}
+	return &Fact{G: g, C: NewCurrentFact()}
 }
 
 // Stringify to make query result to string
@@ -84,7 +85,14 @@ func (f *Fact) save() error {
 }
 
 // What is to query inward
-func (f *Fact) What(subj interface{}, pred string) []interface{} {
+func (f *Fact) What(subj interface{}, preds ...string) []interface{} {
+	pred := ""
+	if len(preds) == 0 {
+		// Finding something of Current fact
+		return f.C.Find(reflect.ValueOf(subj).String())
+	}
+
+	pred = preds[0]
 	switch reflect.TypeOf(subj).Kind() {
 	case reflect.String:
 		f.Q = &Triple{Subject: subj.(string), Predicate: pred}

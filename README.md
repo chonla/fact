@@ -30,5 +30,11 @@ func main() {
 	fmt.Println(f.WhoHas("ชื่อ", "เหมียว"))
 	fmt.Println(f.WhoHas("ชื่อ", "โฮ่ง"))
 	fmt.Println(f.What(f.What("แมว", "ชื่อ"), "สี"))
+
+	// 
+
+	// Fact supports some built-in truths.
+	// Finding time
+	fmt.Println(f.What("เวลา"))
 }
 ```
